@@ -91,6 +91,115 @@ IMPORT_SERIES = [
             {"code": "0003", "name": "EU"},
         ],
     },
+    {
+        "name": "HS 7208 — Hot Rolled Coil (HRC)",
+        "hs10_codes": [
+            # In coils, pickled
+            "7208253000", "7208256000",
+            "7208260030", "7208260060",
+            "7208270040", "7208270045", "7208270060",
+            # In coils, not pickled
+            "7208360030", "7208360060",
+            "7208370030", "7208370060",
+            "7208380015", "7208380030", "7208380090",
+            "7208390020", "7208390025", "7208390030", "7208390090",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "3510", "name": "Brazil"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "5880", "name": "Japan"},
+            {"code": "4280", "name": "Germany"},
+        ],
+    },
+    {
+        "name": "HS 7208 — Steel Plate",
+        "hs10_codes": [
+            "7208510030", "7208510045", "7208510060",
+            "7208520000", "7208530000", "7208540000",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "5880", "name": "Japan"},
+            {"code": "2010", "name": "Mexico"},
+            {"code": "4279", "name": "France"},
+        ],
+    },
+    {
+        "name": "HS 7209 — Cold Rolled Coil (CRC)",
+        "hs10_codes": [
+            "7209150000",
+            "7209160040", "7209160045", "7209160060", "7209160070", "7209160091",
+            "7209170040", "7209170045", "7209170060", "7209170070", "7209170091",
+            "7209181530", "7209181560",
+            "7209182520", "7209182585",
+            "7209186020", "7209186090",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "5880", "name": "Japan"},
+            {"code": "4280", "name": "Germany"},
+            {"code": "5830", "name": "Taiwan"},
+            {"code": "2010", "name": "Mexico"},
+        ],
+    },
+    {
+        "name": "HS 7210 — Hot-Dipped Galvanized Sheet (HDG)",
+        "hs10_codes": [
+            "7210410000",
+            "7210490040", "7210490045", "7210490091", "7210490095",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "5830", "name": "Taiwan"},
+            {"code": "3510", "name": "Brazil"},
+            {"code": "2010", "name": "Mexico"},
+        ],
+    },
+    {
+        "name": "HS 7213 — Wire Rod",
+        "hs10_codes": [
+            # Excluding 7213100000 (rebar in coil form — already tracked under HS 721420)
+            "7213200010", "7213200080",
+            "7213913011", "7213913015", "7213913020", "7213913093",
+            "7213914500", "7213916000",
+            "7213990030", "7213990060", "7213990090",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "2010", "name": "Mexico"},
+            {"code": "4890", "name": "Turkey"},
+            {"code": "4840", "name": "Greece"},
+            {"code": "7290", "name": "Egypt"},
+        ],
+    },
+    {
+        "name": "HS 7214 — Merchant Bar",
+        "hs10_codes": [
+            # Excluding 7214200000 (straight rebar — already tracked under HS 721420)
+            "7214100000",
+            "7214300010", "7214300080",
+            "7214910016", "7214910020", "7214910060", "7214910090",
+            "7214990016", "7214990021", "7214990026",
+            "7214990031", "7214990036", "7214990040", "7214990045",
+            "7214990060", "7214990075", "7214990090",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "4890", "name": "Turkey"},
+            {"code": "2010", "name": "Mexico"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "5330", "name": "India"},
+        ],
+    },
 ]
 
 
