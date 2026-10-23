@@ -983,8 +983,11 @@ def main():
                               import_charts=import_charts, preview=args.preview)
 
     if args.out_file:
+        # Always embed charts as base64 for browser viewing
+        file_html, _ = build_html(results, cap_util_data, import_tables,
+                                  import_charts=import_charts, preview=True)
         with open(args.out_file, "w") as f:
-            f.write(html)
+            f.write(file_html)
         print(f"HTML saved to {args.out_file}")
 
     if args.preview:
