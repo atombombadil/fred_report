@@ -8,10 +8,13 @@ on:
   # Lets you trigger a test run from the Actions tab at any time.
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   send-report:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -25,11 +28,21 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Send FRED report
+      - name: Generate and send FRED report
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           REPORT_RECIPIENT: ${{ secrets.REPORT_RECIPIENT }}
-        run: python fred_report.py
+        run: python fred_report.py --out-file index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          include_files: index.html
+          force_orphan: true
+          commit_message: "Weekly report ${{ github.run_id }}"

@@ -41,10 +41,10 @@ SERIES = {
         "units": "Index (2017=100)",
         "description": "Industrial Production: Iron and Steel Products",
     },
-    "DAUPSA": {
-        "name": "US Domestic Auto Production",
-        "units": "Thousands of Units",
-        "description": "Domestic Auto Production, Seasonally Adjusted",
+    "TOTALSA": {
+        "name": "US Total Vehicle Sales",
+        "units": "Millions of Units (SAAR)",
+        "description": "Total Vehicle Sales, Seasonally Adjusted Annual Rate",
     },
 }
 
@@ -62,9 +62,10 @@ FRED_BASE = "https://api.stlouisfed.org/fred/series/observations"
 CENSUS_BASE = "https://api.census.gov/data/timeseries/intltrade/imports/hs"
 
 IMPORT_SERIES = [
+    # ── Group 23: Reinforcing Bars ─────────────────────────────
     {
-        "name": "HS 721420 — Concrete Reinforcing Bar & Rod",
-        "hs10_codes": ["7214200000"],
+        "name": "Group 23 — Reinforcing Bars",
+        "hs10_codes": ["7213100000", "7214200000", "7228308010"],
         "countries": [
             {"code": "-", "name": "Total"},
             {"code": "5520", "name": "Vietnam"},
@@ -73,14 +74,18 @@ IMPORT_SERIES = [
             {"code": "5800", "name": "South Korea"},
         ],
     },
+    # ── Groups 9+21: Structural Shapes ────────────────────────
     {
-        "name": "HS 7216 — Angles, Shapes & Sections",
+        "name": "Groups 9+21 — Structural Shapes",
         "hs10_codes": [
+            # Group 21: Light Shaped Bars
             "7216100010", "7216100050", "7216210000", "7216220000",
+            "7228703060", "7228703081",
+            # Group 9: Heavy Structural Shapes
             "7216310000", "7216320000", "7216330030", "7216330060",
             "7216330090", "7216400010", "7216400050", "7216500000",
-            "7216610000", "7216690000", "7216910010", "7216910090",
             "7216990010", "7216990090",
+            "7228703010", "7228703020", "7228703041", "7228706000",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -89,20 +94,19 @@ IMPORT_SERIES = [
             {"code": "5330", "name": "India"},
             {"code": "1220", "name": "Canada"},
             {"code": "0003", "name": "EU"},
+            {"code": "4890", "name": "Turkey"},
         ],
     },
+    # ── Group 14: Plates in Coils ──────────────────────────────
     {
-        "name": "HS 7208 — Hot Rolled Coil (HRC)",
+        "name": "Group 14 — Plates in Coils",
         "hs10_codes": [
-            # In coils, pickled
+            "7208101500", "7208103000",
             "7208253000", "7208256000",
-            "7208260030", "7208260060",
-            "7208270040", "7208270045", "7208270060",
-            # In coils, not pickled
             "7208360030", "7208360060",
             "7208370030", "7208370060",
-            "7208380015", "7208380030", "7208380090",
-            "7208390020", "7208390025", "7208390030", "7208390090",
+            "7211140090",
+            "7225303005", "7225303050",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -111,13 +115,44 @@ IMPORT_SERIES = [
             {"code": "1220", "name": "Canada"},
             {"code": "5880", "name": "Japan"},
             {"code": "4280", "name": "Germany"},
+            {"code": "4890", "name": "Turkey"},
         ],
     },
+    # ── Group 46: Hot Rolled Sheets ───────────────────────────
     {
-        "name": "HS 7208 — Steel Plate",
+        "name": "Group 46 — Hot Rolled Sheets",
         "hs10_codes": [
+            "7208106000",
+            "7208260030", "7208260060",
+            "7208270040", "7208270045", "7208270060",
+            "7208380015", "7208380030", "7208380090",
+            "7208390020", "7208390025", "7208390030", "7208390090",
+            "7208406030", "7208406060",
+            "7208530000", "7208540000",
+            "7208900000",
+            "7225307000", "7225407000",
+        ],
+        "countries": [
+            {"code": "-", "name": "Total"},
+            {"code": "5800", "name": "South Korea"},
+            {"code": "3510", "name": "Brazil"},
+            {"code": "1220", "name": "Canada"},
+            {"code": "5880", "name": "Japan"},
+            {"code": "4280", "name": "Germany"},
+            {"code": "4890", "name": "Turkey"},
+        ],
+    },
+    # ── Group 12: Cut to Length Plate ─────────────────────────
+    {
+        "name": "Group 12 — Cut to Length Plate",
+        "hs10_codes": [
+            "7208403030", "7208403060",
             "7208510030", "7208510045", "7208510060",
-            "7208520000", "7208530000", "7208540000",
+            "7208520000",
+            "7210901000",
+            "7211130000", "7211140030", "7211140045",
+            "7225403005", "7225403050",
+            "7225506000", "7226915000",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -126,17 +161,23 @@ IMPORT_SERIES = [
             {"code": "5880", "name": "Japan"},
             {"code": "2010", "name": "Mexico"},
             {"code": "4279", "name": "France"},
+            {"code": "4890", "name": "Turkey"},
         ],
     },
+    # ── Group 48: Cold Rolled Sheets ──────────────────────────
     {
-        "name": "HS 7209 — Cold Rolled Coil (CRC)",
+        "name": "Group 48 — Cold Rolled Sheets",
         "hs10_codes": [
             "7209150000",
             "7209160040", "7209160045", "7209160060", "7209160070", "7209160091",
             "7209170040", "7209170045", "7209170060", "7209170070", "7209170091",
             "7209181530", "7209181560",
-            "7209182520", "7209182585",
             "7209186020", "7209186090",
+            "7209250000", "7209260000", "7209270000", "7209280000",
+            "7209900000",
+            "7210703000",
+            "7225507000", "7225508010", "7225508080",
+            "7225990010", "7225990090",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -145,13 +186,18 @@ IMPORT_SERIES = [
             {"code": "4280", "name": "Germany"},
             {"code": "5830", "name": "Taiwan"},
             {"code": "2010", "name": "Mexico"},
+            {"code": "4890", "name": "Turkey"},
         ],
     },
+    # ── Group 50: Galvanized Hot-Dipped Sheets ────────────────
     {
-        "name": "HS 7210 — Hot-Dipped Galvanized Sheet (HDG)",
+        "name": "Group 50 — Galvanized Hot-Dipped Sheets",
         "hs10_codes": [
             "7210410000",
             "7210490040", "7210490045", "7210490091", "7210490095",
+            "7210706060",
+            "7212301030", "7212301090", "7212303000", "7212305000",
+            "7225920000", "7226990130",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -160,16 +206,18 @@ IMPORT_SERIES = [
             {"code": "5830", "name": "Taiwan"},
             {"code": "3510", "name": "Brazil"},
             {"code": "2010", "name": "Mexico"},
+            {"code": "4890", "name": "Turkey"},
         ],
     },
+    # ── Group 7: Wire Rod ─────────────────────────────────────
     {
-        "name": "HS 7213 — Wire Rod",
+        "name": "Group 7 — Wire Rod",
         "hs10_codes": [
-            # Excluding 7213100000 (rebar in coil form — already tracked under HS 721420)
-            "7213200010", "7213200080",
             "7213913011", "7213913015", "7213913020", "7213913093",
             "7213914500", "7213916000",
-            "7213990030", "7213990060", "7213990090",
+            "7213990030", "7213990090",
+            "7227200030",
+            "7227906020", "7227906030", "7227906035",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -180,16 +228,24 @@ IMPORT_SERIES = [
             {"code": "7290", "name": "Egypt"},
         ],
     },
+    # ── Group 19: Hot Rolled Bars ─────────────────────────────
     {
-        "name": "HS 7214 — Merchant Bar",
+        "name": "Group 19 — Hot Rolled Bars",
         "hs10_codes": [
-            # Excluding 7214200000 (straight rebar — already tracked under HS 721420)
+            "7213200010", "7213200080",
+            "7213990060",
             "7214100000",
             "7214300010", "7214300080",
             "7214910016", "7214910020", "7214910060", "7214910090",
             "7214990016", "7214990021", "7214990026",
             "7214990031", "7214990036", "7214990040", "7214990045",
             "7214990060", "7214990075", "7214990090",
+            "7215901000",
+            "7227200080",
+            "7227906005", "7227906010", "7227906040", "7227906090",
+            "7228201000",
+            "7228308005", "7228308015", "7228308041", "7228308045", "7228308070",
+            "7228400000", "7228606000", "7228800000",
         ],
         "countries": [
             {"code": "-", "name": "Total"},
@@ -419,7 +475,23 @@ def build_import_table_data(import_cfg: dict, accum: dict) -> dict:
     }
 
 
-IMPORT_CHART_COLORS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]
+COUNTRY_COLORS = {
+    "South Korea": "#1f77b4",
+    "Turkey":      "#d62728",
+    "Mexico":      "#ff7f0e",
+    "Canada":      "#2ca02c",
+    "Japan":       "#9467bd",
+    "Germany":     "#8c564b",
+    "Brazil":      "#e377c2",
+    "India":       "#17becf",
+    "Taiwan":      "#bcbd22",
+    "EU":          "#7f7f7f",
+    "Vietnam":     "#aec7e8",
+    "Egypt":       "#ffbb78",
+    "France":      "#98df8a",
+    "Greece":      "#ff9896",
+}
+_FALLBACK_COLORS = ["#c5b0d5", "#c49c94", "#f7b6d2", "#dbdb8d", "#9edae5", "#ad494a"]
 
 
 def make_import_stacked_chart(import_cfg: dict, accum: dict) -> bytes:
@@ -452,11 +524,17 @@ def make_import_stacked_chart(import_cfg: dict, accum: dict) -> bytes:
     fig, ax = plt.subplots(figsize=(10, 4.5))
     bar_width = 20
 
+    fallback_idx = 0
     bottom = [0.0] * len(dates)
-    for idx, name in enumerate(country_names):
+    for name in country_names:
+        if name in COUNTRY_COLORS:
+            color = COUNTRY_COLORS[name]
+        else:
+            color = _FALLBACK_COLORS[fallback_idx % len(_FALLBACK_COLORS)]
+            fallback_idx += 1
         vals = country_vals[name]
         ax.bar(dates, vals, width=bar_width, bottom=bottom,
-               label=name, color=IMPORT_CHART_COLORS[idx % len(IMPORT_CHART_COLORS)], alpha=0.9)
+               label=name, color=color, alpha=0.9)
         bottom = [b + v for b, v in zip(bottom, vals)]
 
     ax.bar(dates, row_rest, width=bar_width, bottom=bottom,
@@ -593,6 +671,12 @@ def format_change(val: float) -> str:
     return f'<span style="color:{color};font-weight:bold">{arrow} {val:+.2f}%</span>'
 
 
+def format_pp_change(val: float) -> str:
+    color = "#2e7d32" if val >= 0 else "#c62828"
+    arrow = "&#9650;" if val >= 0 else "&#9660;"
+    return f'<span style="color:{color};font-weight:bold">{arrow} {val:+.1f} pp</span>'
+
+
 def format_cap_util(val: float) -> str:
     if val >= 80:
         color = "#2e7d32"
@@ -677,8 +761,8 @@ def build_html(results: list[dict], cap_util_data: list[dict],
             <td style="padding:10px 14px;text-align:center;font-size:0.8em;color:#666">NAICS {info['naics']}</td>
             <td style="padding:10px 14px;text-align:center">{format_cap_util(m['latest_value'])}</td>
             <td style="padding:10px 14px;text-align:center;font-size:0.85em;color:#666">{m['latest_date'].strftime('%b %Y')}</td>
-            <td style="padding:10px 14px;text-align:center">{format_change(m['mom_change'])}</td>
-            <td style="padding:10px 14px;text-align:center">{format_change(m['yoy_change'])}</td>
+            <td style="padding:10px 14px;text-align:center">{format_pp_change(m['latest_value'] - m['prev_month_value'])}</td>
+            <td style="padding:10px 14px;text-align:center">{format_pp_change(m['latest_value'] - m['prev_year_value'])}</td>
         </tr>"""
 
     # --- Steel import charts ---
@@ -752,8 +836,8 @@ def build_html(results: list[dict], cap_util_data: list[dict],
 <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#333">
 
     <div style="background:linear-gradient(135deg,#1a237e,#283593);padding:24px 30px;border-radius:8px;margin-bottom:24px">
-        <h1 style="color:#fff;margin:0;font-size:22px">US Steel &amp; Auto Production Report</h1>
-        <p style="color:#90caf9;margin:6px 0 0;font-size:14px">Production, Capacity Utilization &amp; Steel Imports &mdash; {now}</p>
+        <h1 style="color:#fff;margin:0;font-size:22px">US Steel &amp; Auto Report</h1>
+        <p style="color:#90caf9;margin:6px 0 0;font-size:14px">Production, Vehicle Sales, Capacity Utilization &amp; Steel Imports &mdash; {now}</p>
     </div>
 
     <h2 style="font-size:18px;color:#1a237e;margin-bottom:12px">Production Summary</h2>
@@ -786,8 +870,8 @@ def build_html(results: list[dict], cap_util_data: list[dict],
                 <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">NAICS</th>
                 <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">Utilization</th>
                 <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">As Of</th>
-                <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">MoM</th>
-                <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">YoY</th>
+                <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">MoM (pp)</th>
+                <th style="padding:10px 14px;text-align:center;font-size:0.85em;color:#555">YoY (pp)</th>
             </tr>
         </thead>
         <tbody>
@@ -801,7 +885,7 @@ def build_html(results: list[dict], cap_util_data: list[dict],
     {import_html}
 
     <div style="margin-top:30px;padding-top:16px;border-top:1px solid #e0e0e0;font-size:0.8em;color:#999">
-        <p>Production data: FRED (Federal Reserve Bank of St. Louis) &mdash; IPG3311A2S, DAUPSA</p>
+        <p>Production data: FRED (Federal Reserve Bank of St. Louis) &mdash; IPG3311A2S, TOTALSA</p>
         <p>Capacity Utilization: FRED &mdash; CAPUTLG3311A2S, CAPUTLG332S, CAPUTLG333S, CAPUTLG335S, CAPUTLG336S</p>
         <p>Import data: US Census Bureau International Trade API &mdash; HS 721420, HS 7216</p>
         <p>Report generated {now}</p>
@@ -816,7 +900,7 @@ def build_html(results: list[dict], cap_util_data: list[dict],
 def send_email(html: str, images: list[tuple[str, bytes]]):
     """Send the HTML report via Gmail SMTP with inline images."""
     msg = MIMEMultipart("related")
-    msg["Subject"] = f"US Production Report — {datetime.now().strftime('%B %Y')}"
+    msg["Subject"] = f"US Steel & Auto Report — {datetime.now().strftime('%B %Y')}"
     msg["From"] = GMAIL_ADDRESS
     msg["To"] = REPORT_RECIPIENT
 
@@ -838,6 +922,8 @@ def main():
     parser = argparse.ArgumentParser(description="FRED Production Report")
     parser.add_argument("--preview", action="store_true",
                         help="Open report in browser instead of emailing")
+    parser.add_argument("--out-file", metavar="PATH",
+                        help="Also save HTML to this file (in addition to emailing)")
     args = parser.parse_args()
 
     # Validate config
@@ -895,6 +981,11 @@ def main():
     print("\nBuilding HTML report...")
     html, images = build_html(results, cap_util_data, import_tables,
                               import_charts=import_charts, preview=args.preview)
+
+    if args.out_file:
+        with open(args.out_file, "w") as f:
+            f.write(html)
+        print(f"HTML saved to {args.out_file}")
 
     if args.preview:
         preview_path = os.path.join(os.path.dirname(__file__), "preview.html")
