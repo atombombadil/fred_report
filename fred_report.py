@@ -353,16 +353,33 @@ def _census_time_range(n_years: int = 3) -> tuple[str, str]:
 
 
 def _fetch_hs10_bulk(hs10_code: str, time_start: str, time_end: str) -> list[list]:
-    """Fetch all countries × all months for one HS10 code in a single call."""
-    params = {
-        "get": "I_COMMODITY,CTY_CODE,GEN_QY1_MO",
-        "I_COMMODITY": hs10_code,
-        "time": f"from {time_start} to {time_end}",
-        "key": CENSUS_API_KEY,
-    }
-    resp = requests.get(CENSUS_BASE, params=params, timeout=60)
-    resp.raise_for_status()
-    return resp.json()
+    """Fetch all countries × all months for one HS10 code, in annual chunks."""
+    start_year = int(time_start.split("-")[0])
+    end_year = int(time_end.split("-")[0])
+    all_rows: list[list] = []
+    header: list | None = None
+
+    for year in range(start_year, end_year + 1):
+        chunk_start = f"{year}-01" if year > start_year else time_start
+        chunk_end = f"{year}-12" if year < end_year else time_end
+        params = {
+            "get": "I_COMMODITY,CTY_CODE,GEN_QY1_MO",
+            "I_COMMODITY": hs10_code,
+            "time": f"from {chunk_start} to {chunk_end}",
+            "key": CENSUS_API_KEY,
+        }
+        resp = requests.get(CENSUS_BASE, params=params, timeout=90)
+        resp.raise_for_status()
+        chunk = resp.json()
+        if len(chunk) < 2:
+            continue
+        if header is None:
+            header = chunk[0]
+        all_rows.extend(chunk[1:])
+
+    if header is None:
+        return []
+    return [header] + all_rows
 
 
 def fetch_import_raw(import_cfg: dict) -> dict:
