@@ -523,9 +523,8 @@ def make_import_stacked_chart(import_cfg: dict, accum: dict) -> bytes:
     for code, name in country_codes.items():
         named_monthly[name] = {ym: v / 1000 for ym, v in accum.get(code, {}).items()}
 
-    # Last 24 months
-    all_months = sorted(total_monthly.keys())
-    all_months = all_months[-24:]
+    # From January 2024 onward
+    all_months = sorted(ym for ym in total_monthly.keys() if ym >= (2024, 1))
 
     dates = [datetime(y, m, 15) for y, m in all_months]
     totals = [total_monthly.get(ym, 0) for ym in all_months]
